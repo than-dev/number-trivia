@@ -37,9 +37,9 @@ dev_dependencies:
 
   # code linter
   flutter_lints: ^2.0.0
+  mocktail: ^0.3.0
 
   # mocker
-  mockito: ^5.3.2
 
 flutter:
   uses-material-design: true
