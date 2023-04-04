@@ -3,7 +3,7 @@ import 'package:clean_flutter/features/number_trivia/data/datasources/number_tri
 import 'package:clean_flutter/features/number_trivia/data/repositories/number_trivia_repository_impl.dart';
 import 'package:clean_flutter/features/number_trivia/data/models/number_trivia_model.dart';
 import 'package:clean_flutter/features/number_trivia/domain/entities/number_trivia.dart';
-import 'package:clean_flutter/core/platform/network_info.dart';
+import 'package:clean_flutter/core/network/network_info.dart';
 import 'package:clean_flutter/core/error/exceptions.dart';
 import 'package:clean_flutter/core/error/failures.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -34,7 +34,7 @@ void main() {
 
     test('should check if the device is online', () {
       //arrange
-      when(() => mockNetworkInfo.verifyIsConnected()).thenAnswer((_) => true);
+      when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       when((() => mockRemoteDataSource.getConcreteNumberTrivia(tNumber)))
           .thenAnswer((_) async => tNumberTriviaModel);
       when(() => mockLocalDataSource.cacheNumberTrivia(tNumberTriviaModel))
@@ -44,12 +44,12 @@ void main() {
       mockRepository.getConcreteNumberTrivia(tNumber);
 
       // assert
-      verify(() => mockNetworkInfo.verifyIsConnected());
+      verify(() => mockNetworkInfo.isConnected);
     });
 
     group('device is online', () {
       setUp(() {
-        when(() => mockNetworkInfo.verifyIsConnected()).thenAnswer((_) => true);
+        when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       });
 
       test(
@@ -105,8 +105,7 @@ void main() {
 
     group('device is offline', () {
       setUp(() {
-        when(() => mockNetworkInfo.verifyIsConnected())
-            .thenAnswer((_) => false);
+        when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => false);
       });
 
       test(
@@ -161,18 +160,18 @@ void main() {
           .thenAnswer((_) async => tNumberTriviaModel);
       when(() => mockLocalDataSource.cacheNumberTrivia(tNumberTriviaModel))
           .thenAnswer((_) async => {});
-      when(() => mockNetworkInfo.verifyIsConnected()).thenReturn(true);
+      when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
 
       // act
       await mockRepository.getRandomNumberTrivia();
 
       // assert
-      verify(() => mockNetworkInfo.verifyIsConnected());
+      verify(() => mockNetworkInfo.isConnected);
     });
 
     group('device is online', () {
       setUp(() {
-        when(() => mockNetworkInfo.verifyIsConnected()).thenReturn(true);
+        when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       });
 
       test(
@@ -229,8 +228,7 @@ void main() {
 
     group('device is offline', () {
       setUp(() {
-        when(() => mockNetworkInfo.verifyIsConnected())
-            .thenAnswer((_) => false);
+        when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => false);
       });
 
       test(
