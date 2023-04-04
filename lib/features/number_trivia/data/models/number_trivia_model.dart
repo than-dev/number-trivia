@@ -12,11 +12,11 @@ class NumberTriviaModel extends NumberTrivia {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
+  String toJson() {
+    return json.encode({
       'text': text,
       'number': number,
-    };
+    });
   }
 
   const NumberTriviaModel({
