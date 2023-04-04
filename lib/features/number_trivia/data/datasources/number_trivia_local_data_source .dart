@@ -1,7 +1,33 @@
+import 'package:clean_flutter/core/error/exceptions.dart';
 import 'package:clean_flutter/features/number_trivia/data/models/number_trivia_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class NumberTriviaLocalDataSource {
   Future<NumberTriviaModel> getLastNumberTrivia();
 
   Future<void> cacheNumberTrivia(NumberTriviaModel triviaCode);
+}
+
+const CACHED_NUMBER_TRIVIA = 'CACHED_NUMBER_TRIVIA';
+
+class NumberTriviaLocalDataSourceImpl implements NumberTriviaLocalDataSource {
+  final SharedPreferences sharedPreferences;
+
+  NumberTriviaLocalDataSourceImpl({required this.sharedPreferences});
+
+  @override
+  Future<void> cacheNumberTrivia(NumberTriviaModel triviaCode) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<NumberTriviaModel> getLastNumberTrivia() {
+    final jsonString = sharedPreferences.getString(CACHED_NUMBER_TRIVIA);
+
+    if (jsonString != null) {
+      return Future.value(NumberTriviaModel.fromJson(jsonString));
+    } else {
+      throw CacheException();
+    }
+  }
 }

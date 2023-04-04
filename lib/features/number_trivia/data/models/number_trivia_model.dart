@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import '../../domain/entities/number_trivia.dart';
 
 class NumberTriviaModel extends NumberTrivia {
-  factory NumberTriviaModel.fromJson(Map<String, dynamic> json) {
+  factory NumberTriviaModel.fromJson(String jsonString) {
+    final jsonDecoded = json.decode(jsonString);
+
     return NumberTriviaModel(
-      text: json['text'],
-      number: (json['number'] as num).toInt(),
+      text: jsonDecoded['text'],
+      number: (jsonDecoded['number']).toInt(),
     );
   }
 
