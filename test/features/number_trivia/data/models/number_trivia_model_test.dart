@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:clean_flutter/features/number_trivia/data/models/number_trivia_model.dart';
 import 'package:clean_flutter/features/number_trivia/domain/entities/number_trivia.dart';
 import '../../../../fixtures/fixture_reader.dart';
@@ -21,10 +19,9 @@ void main() {
       'should return a valid model when the JSON number is an integer',
       () async {
         // arrange
-        final Map<String, dynamic> jsonMap =
-            json.decode(fixture('trivia.json'));
+        final jsonString = fixture('trivia.json');
         // act
-        final result = NumberTriviaModel.fromJson(jsonMap);
+        final result = NumberTriviaModel.fromJson(jsonString);
         // assert
         expect(result, tNumberTriviaModel);
       },
@@ -34,10 +31,9 @@ void main() {
       'should return a valid model when the JSON number is regarded as a double',
       () async {
         // arrange
-        final Map<String, dynamic> jsonMap =
-            json.decode(fixture('trivia_double.json'));
+        final jsonString = fixture('trivia_double.json');
         // act
-        final result = NumberTriviaModel.fromJson(jsonMap);
+        final result = NumberTriviaModel.fromJson(jsonString);
         // assert
         expect(result, tNumberTriviaModel);
       },
