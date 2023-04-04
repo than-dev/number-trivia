@@ -3,7 +3,7 @@ import 'package:clean_flutter/features/number_trivia/data/datasources/number_tri
 import 'package:clean_flutter/features/number_trivia/domain/repositories/number_trivia_repository.dart';
 import 'package:clean_flutter/features/number_trivia/data/models/number_trivia_model.dart';
 import 'package:clean_flutter/features/number_trivia/domain/entities/number_trivia.dart';
-import 'package:clean_flutter/core/platform/network_info.dart';
+import 'package:clean_flutter/core/network/network_info.dart';
 import 'package:clean_flutter/core/error/exceptions.dart';
 import 'package:clean_flutter/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
@@ -38,7 +38,7 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   Future<Either<Failure, NumberTrivia>> _getTrivia(
     _ConcreteOrRandomChooser getConcreteOrRandom,
   ) async {
-    if (networkInfo.verifyIsConnected()) {
+    if (await networkInfo.isConnected) {
       try {
         final remoteTrivia = await getConcreteOrRandom();
         localDataSource.cacheNumberTrivia(NumberTriviaModel(
