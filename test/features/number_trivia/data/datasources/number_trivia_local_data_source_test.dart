@@ -50,4 +50,22 @@ void main() {
       expect(() => call(), throwsA(isA<CacheException>()));
     });
   });
+
+  group('cacheNumberTrivia', () {
+    const tNumberTriviaModel =
+        NumberTriviaModel(number: 1, text: 'test trivia');
+
+    test('should call SharedPreferences to cache the data', () async {
+      // act
+      when(() => mockSharedPreferences.setString(any(), any()))
+          .thenAnswer((_) async => true);
+      await dataSource.cacheNumberTrivia(tNumberTriviaModel);
+
+      final expectedJsonString = tNumberTriviaModel.toJson();
+
+      // assert
+      verify(() => mockSharedPreferences.setString(
+          CACHED_NUMBER_TRIVIA, expectedJsonString));
+    });
+  });
 }
