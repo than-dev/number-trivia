@@ -1,6 +1,8 @@
 import 'package:clean_flutter/features/number_trivia/data/models/number_trivia_model.dart';
 import 'package:clean_flutter/features/number_trivia/domain/entities/number_trivia.dart';
 import '../../../../fixtures/fixture_reader.dart';
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -47,11 +49,11 @@ void main() {
         // act
         final result = tNumberTriviaModel.toJson();
         // assert
-        final expectedJsonMap = {
+        final expected = json.encode({
           "text": "Test Text",
           "number": 1,
-        };
-        expect(result, expectedJsonMap);
+        });
+        expect(result, expected);
       },
     );
   });

@@ -14,8 +14,8 @@ class NumberTriviaModel extends NumberTrivia {
 
   String toJson() {
     return json.encode({
-      'text': text,
-      'number': number,
+      "text": text,
+      "number": number,
     });
   }
 
