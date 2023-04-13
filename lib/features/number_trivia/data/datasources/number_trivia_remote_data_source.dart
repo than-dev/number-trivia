@@ -1,6 +1,6 @@
-import 'package:clean_flutter/core/error/exceptions.dart';
 import 'package:clean_flutter/features/number_trivia/data/models/number_trivia_model.dart';
 import 'package:clean_flutter/features/number_trivia/domain/entities/number_trivia.dart';
+import 'package:clean_flutter/core/error/exceptions.dart';
 import 'package:http/http.dart' as http;
 
 abstract class NumberTriviaRemoteDataSource {

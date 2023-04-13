@@ -16,7 +16,7 @@ dependencies:
   get_it: ^7.2.0
 
   # like a proxy to state management
-  flutter_bloc: ^8.1.1
+  flutter_bloc: ^8.1.2
 
   # value equality (compare objects easily)
   equatable: ^2.0.5
