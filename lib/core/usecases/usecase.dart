@@ -8,5 +8,5 @@ abstract class UseCase<Type, Params> {
 
 class NoParams extends Equatable {
   @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+  List<Object?> get props => [];
 }
