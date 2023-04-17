@@ -5,8 +5,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Dart run all tests",
-			"program": "./test/",
+			"name": "numbertrivia",
 			"request": "launch",
 			"type": "dart"
 		}

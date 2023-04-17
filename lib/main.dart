@@ -1,11 +1,16 @@
+import 'package:clean_flutter/features/number_trivia/presentation/pages/number_trivia_page.dart';
 import 'package:flutter/material.dart';
 
-import 'injection|_container.dart' as dependency_injection;
+import 'injection_container.dart' as dependency_injection;
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dependency_injection.init();
+
   runApp(const MyApp());
 }
+
+final ThemeData theme = ThemeData();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,26 +18,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Number Trivia',
+      theme: theme.copyWith(
+          colorScheme: theme.colorScheme.copyWith(
+              primary: Colors.green.shade800,
+              secondary: Colors.green.shade600)),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const NumberTriviaPage(),
     );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  final String title;
-
-  const MyHomePage({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(title);
   }
 }
